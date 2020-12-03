@@ -20,8 +20,8 @@
             <template v-slot:[`item.title`]="{ item }">
                 <a v-if="item.title">{{item.title}}</a>
             </template>
-            <template v-slot:[`item.operation`]>
-                <v-row>
+            <template v-slot:[`item.operation`]="{ item }">
+                <v-row v-if="item.title">
                     <div class="operation-btn">
                         <v-btn color="primary" class="post-list-btn">Edit</v-btn>
                     </div>

@@ -3,11 +3,16 @@ import VueRouter from "vue-router";
 
 import Login from "../pages/user/Login";
 import PostList from "../pages/post/PostList";
-import store from "../store";
+import UserList from "../pages/user/UserList";
+import Test from "../pages/Test";
 
 Vue.use(VueRouter);
 
 const routes = [
+    {
+        path: "/test",
+        component: Test,
+    },
     {
         path: "/login",
         name: "login",
@@ -17,6 +22,11 @@ const routes = [
         path: "/post/list",
         name: "post-list",
         component: PostList,
+    },
+    {
+        path: "/user/list",
+        name: "user-list",
+        component: UserList,
     },
     {
         path: "/*",
@@ -32,12 +42,12 @@ const router = new VueRouter({
 /**
  * This is to handle and check authentication for routing.
  */
-router.beforeEach((to, from, next) => {
-    const loggedIn = store.getters.isLoggedIn;
-    if (!loggedIn && to.name != "login") {
-        return next("/login");
-    }
-    next();
-});
+// router.beforeEach((to, from, next) => {
+//     const loggedIn = store.getters.isLoggedIn;
+//     if (!loggedIn && to.name != "login") {
+//         return next("/login");
+//     }
+//     next();
+// });
 
 export default router;

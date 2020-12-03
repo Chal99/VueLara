@@ -22,7 +22,11 @@ export default {
                 },
                 {
                     text: "Posted User",
-                    value: "created_user",
+                    value: "user.name",
+                },
+                {
+                    text: "Posted Date",
+                    value: "created_at",
                 },
                 {
                     text: "Operation",
@@ -37,7 +41,8 @@ export default {
         ...mapGetters(["isLoggedIn"]),
         headers() {
             if (!this.isLoggedIn) {
-                return this.headerList.slice(0, this.headerList.length - 1);
+                // return this.headerList.slice(0, this.headerList.length - 1); for isnot login
+                return this.headerList;
             } else {
                 return this.headerList;
             }
@@ -64,7 +69,8 @@ export default {
                 return (
                     post.title.includes(this.keyword) ||
                     post.description.includes(this.keyword) ||
-                    post.created_user.includes(this.keyword)
+                    post.create_user_id.includes(this.keyword) ||
+                    post.created_at.includes(this.keyword)
                 );
             });
         },
