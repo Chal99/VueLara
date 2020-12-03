@@ -23,7 +23,7 @@ export default {
                 },
                 {
                     text: "Created User",
-                    value: "create_user_id",
+                    value: "user.name",
                 },
                 {
                     text: "Type",
