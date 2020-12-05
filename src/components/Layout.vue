@@ -5,9 +5,11 @@
             <v-container>
                 <v-row>
                     <v-toolbar-title class="title">
-                        <span>{{ title }}</span>
+                        <router-link class="route-link" :to="{ name: 'post-list' }" v-if="!isLoggedIn">{{ title }}</router-link>
                     </v-toolbar-title>
                     <div class="route-links">
+                        <router-link class="route-link" :to="{ name: 'post-list' }" v-if="!isLoggedIn">Post</router-link>
+                        <router-link class="route-link" :to="{ name: 'user-list' }" v-if="!isLoggedIn">User</router-link>
                     </div>
                     <v-spacer></v-spacer>
                     <div class="route-links">

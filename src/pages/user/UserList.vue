@@ -23,8 +23,12 @@
     </v-card-title>
     <v-container>
         <v-data-table :headers="headers" :items="showList">
+            <template v-slot:[`item.name`]="{ item }">
+                <!-- <a v-if="item.title">{{item.title}}</a> -->
+                <router-link :to="{ name: 'user-detail', params: { userId: item }}">{{item.name}}</router-link>
+            </template>
             <template v-slot:[`item.type`]="{ item }">
-                <a v-if="item.type">{{ item.type==0 ? "Admin":"User" }}</a>
+                <a v-if="item.type">{{ item.type === "0" ? "Admin":"User" }}</a>
             </template>
             <template v-slot:[`item.operation`]="{ item }">
                 <v-row v-if="item.title">
@@ -41,6 +45,6 @@
 </v-card>
 </template>
 
-<script src="../../services/user/user-list.js">
+<script src="../../services/pages/user/user-list.js">
 </script>
 

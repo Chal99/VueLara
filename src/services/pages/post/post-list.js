@@ -34,7 +34,13 @@ export default {
                 },
             ],
             postList: [],
+            postlist:{
+                id:'',
+                title:'',
+                description:''
+            },
             showList: [],
+
         };
     },
     computed: {
@@ -74,5 +80,38 @@ export default {
                 );
             });
         },
+
+        /**
+         * This is to create post.
+         * @returns array
+         */
+        createPost(){
+            this.$router.push({name:'post-create'})
+        },
+
+        /**
+         * 
+         * This is to store post.
+         * @returns array
+         */
+        storePost(){
+            this.$axios.post("/post/store",this.postlist)
+                .then((response)=> { 
+                    if(response.status === 201) {
+                        this.$router.push({name:'post-list'})
+                        console.log( this.$router.push({name:'post-list'}));
+                    }
+                    else{
+                        console.log('sds');
+                    }
+                })
+        },
+        confirmPost(){
+            this.$axios.get("/post/create")
+            .then((response)=>{
+                console.log(response.title);
+               
+            });
+        }
     },
 };
