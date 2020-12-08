@@ -8,7 +8,18 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.userId.name }}</p>
+       <img :src="image_url+$route.params.userId.profile" height="250" width="350">
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col :cols="2">
+        <p class="font-weight-bold">Name</p>
+      </v-col>
+      <v-col :cols="1">
+        <p>:</p>
+      </v-col>
+      <v-col :cols="9">
+        <p class="font-weight-medium">{{ $route.params.userId.profile }}</p>
       </v-col>
     </v-row>
     <v-row>
@@ -85,7 +96,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.userId.creat_user_id }}</p>
+        <p class="font-weight-medium">{{ $route.params.userId.name }}</p>
       </v-col>
     </v-row>
     <v-row>
@@ -107,7 +118,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.userId.creat_user_id }}</p>
+        <p class="font-weight-medium">{{ $route.params.userId.name }}</p>
       </v-col>
     </v-row>
     <div class="d-flex justify-end">
@@ -115,3 +126,6 @@
     </div>
   </v-card>
 </template>
+
+<script src="../../services/pages/user/user-detail.js">
+</script>

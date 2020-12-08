@@ -53,7 +53,7 @@
       </v-col>
       <v-col :cols="9">
         <p class="font-weight-medium">
-          {{ $route.params.postId.creat_user_id }}
+          {{ $route.params.postId.user.name }}
         </p>
       </v-col>
     </v-row>
@@ -76,7 +76,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.postId.creat_user_id }}</p>
+        <p class="font-weight-medium">{{ $route.params.postId.user.name }}</p>
       </v-col>
     </v-row>
     

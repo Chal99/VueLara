@@ -16,6 +16,8 @@
         </v-form>
     </v-card-title>
     <v-container>
+        
+       
         <v-data-table :headers="headers" :items="showList">
             <template v-slot:[`item.title`]="{ item }">
                 <!-- <a v-if="item.title">{{item.title}}</a> -->
@@ -24,7 +26,7 @@
             <template v-slot:[`item.operation`]="{ item }">
                 <v-row v-if="item.title">
                     <div class="operation-btn">
-                        <v-btn color="primary" class="post-list-btn">Edit</v-btn>
+                        <v-btn color="primary" class="post-list-btn" @click="editPost(item)">Edit</v-btn>
                     </div>
                     <div class="operation-btn">
                         <v-btn color="error" class="post-list-btn">Delete</v-btn>

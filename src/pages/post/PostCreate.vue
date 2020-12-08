@@ -1,20 +1,25 @@
 <template>
-  <v-card>
-    <v-card-title>Post Create</v-card-title>
-    <div class="ml-5 mr-5">
-      <v-form ref="form">
-        <v-text-field v-model="postlist.title" name="title" label="Title" required></v-text-field>
-        <v-text-field v-model="postlist.description" name="description" label="Description" required></v-text-field>
-        <div class="d-flex justify-end mb-6">
-          <router-link :to="{ name: 'post-confirm', params: { title : postlist.title, description: postlist.description }}" class="post-list-btn">create</router-link>
-          <v-btn color="error" class="mr-4 mb-5"> Cancel </v-btn>
-        </div>
-      </v-form>
-    </div>
-  </v-card>
+  <div class="create">
+    <v-card>
+      <v-card-title>Post Create</v-card-title>
+      <div class="ml-5 mr-5">
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-text-field v-model="postlist.title" name="title" label="Title" v-if="$route.params.postlist" :placeholder="$route.params.postlist.title" :rules="postlist.titleRules" required></v-text-field>
+          <v-text-field v-model="postlist.title" name="title" label="Title" v-else :rules="postlist.titleRules" required></v-text-field>
+          <v-text-field v-model="postlist.description" name="description" label="Description" v-if="$route.params.postlist" :placeholder="$route.params.postlist.description" :rules="postlist.descriptionRules" required></v-text-field>
+          <v-text-field v-model="postlist.description" name="description" label="Description" v-else :rules="postlist.descriptionRules" required></v-text-field>
+
+          <div class="d-flex justify-end mb-6"> 
+            <v-btn color="success" class="mr-4 mb-5" :disabled="!valid" @click="validate()"> Create </v-btn>
+            <v-btn color="error" class="mr-4 mb-5" @click="reset()"> Clear </v-btn>
+          </div>
+        </v-form>
+      </div>
+    </v-card>
+  </div>
 </template>
 
-<script src="../../services/pages/post/post-list.js">
+<script src="../../services/pages/post/post-create.js">
 </script>
 
 <style scoped src="../../assets/css/pages/post/post-list.css">

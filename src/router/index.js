@@ -2,9 +2,10 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Login from "../pages/user/Login";
-import PostCreate from "../pages/post/PostCreate";
 import PostList from "../pages/post/PostList";
 import UserList from "../pages/user/UserList";
+import PostCreate from "../pages/post/PostCreate";
+
 import PostEdit from "../pages/post/PostEdit";
 import PostConfirm from"../pages/post/PostConfirm";
 import PostDetail from "../pages/post/PostDetail";
@@ -34,11 +35,13 @@ const routes = [
         path: "/post/create",
         name: "post-create",
         component: PostCreate,
+        props: true,
     },
     {
-        path: "/post/:title/confirm",
+        path: "/post/confirm",
         name: "post-confirm",
         component: PostConfirm,
+        props: true,
     },
     {
         path: "/post/edit",
@@ -62,10 +65,10 @@ const routes = [
         name: "user-list",
         component: UserList,
     },
-    // {
-    //     path: "/*",
-    //     redirect: "/post/list",
-    // },
+    {
+        path: "/*",
+        redirect: "/post/list",
+    },
 ];
 
 const router = new VueRouter({

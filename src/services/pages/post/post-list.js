@@ -6,6 +6,9 @@ export default {
             dialogTitle: "",
             dialog: false,
             isDeleteDialog: false,
+            id:'',
+            title:'',
+            description:'',
             headerList: [
                 {
                     text: "ID",
@@ -36,6 +39,7 @@ export default {
             postList: [],
             postlist:{
                 id:'',
+                status:'',
                 title:'',
                 description:''
             },
@@ -56,7 +60,7 @@ export default {
     },
     mounted() {
         this.$axios
-            .get("/post/list")
+            .get("/post")
             .then((response) => {
                 this.postList = response.data;
                 this.showList = this.postList;
@@ -88,30 +92,15 @@ export default {
         createPost(){
             this.$router.push({name:'post-create'})
         },
-
         /**
-         * 
-         * This is to store post.
+         * This is to create post.
          * @returns array
          */
-        storePost(){
-            this.$axios.post("/post/store",this.postlist)
-                .then((response)=> { 
-                    if(response.status === 201) {
-                        this.$router.push({name:'post-list'})
-                        console.log( this.$router.push({name:'post-list'}));
-                    }
-                    else{
-                        console.log('sds');
-                    }
-                })
-        },
-        confirmPost(){
-            this.$axios.get("/post/create")
-            .then((response)=>{
-                console.log(response.title);
-               
+        editPost(item){
+            this.$router.push({
+                name: 'post-edit', 
+                params: { item: item }
             });
-        }
+        },
     },
 };
