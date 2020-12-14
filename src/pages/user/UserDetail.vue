@@ -19,7 +19,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.userId.profile }}</p>
+        <p class="font-weight-medium">{{ $route.params.userId.name }}</p>
       </v-col>
     </v-row>
     <v-row>

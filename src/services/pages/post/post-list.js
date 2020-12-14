@@ -44,6 +44,7 @@ export default {
                 description:''
             },
             showList: [],
+            search:'',
 
         };
     },
@@ -59,17 +60,24 @@ export default {
         },
     },
     mounted() {
-        this.$axios
-            .get("/post")
-            .then((response) => {
-                this.postList = response.data;
-                this.showList = this.postList;
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+       this.listPost();
     },
     methods: {
+        /**
+         * This is for search by title.
+         * @returns void
+         */
+        searchPost(){
+            this.$axios.get('/post?search='+this.search)
+            .then((response)=> {
+                if(response) {
+                    this.showList = response.data;
+                }
+                else{
+                    console.log('error');
+                }
+            });
+        },
         /**
          * This is to filter posts of datatable.
          * @returns void
@@ -86,14 +94,31 @@ export default {
         },
 
         /**
-         * This is to create post.
+         * This is to show list of post.
          * @returns array
          */
+        listPost(){
+            this.$axios
+            .get("/post")
+            .then((response) => {
+                this.postList = response.data;
+                this.showList = this.postList;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        },
+
         createPost(){
             this.$router.push({name:'post-create'})
         },
+
+        uploadPost(){
+            this.$router.push({name:'post-upload'})
+        },
+
         /**
-         * This is to create post.
+         * This is to edit post.
          * @returns array
          */
         editPost(item){
@@ -101,6 +126,26 @@ export default {
                 name: 'post-edit', 
                 params: { item: item }
             });
+        },
+
+        /**
+         * This is to delete post.
+         * @returns array
+         */
+        deletePost(id){
+
+            if(! confirm('Are You sure to delete?')){
+                return;
+            }
+            this.$axios.delete(`/post/${id}`)
+                    .then((response)=> {
+                        if(response) {
+                           this.listPost();
+                        }
+                        else{
+                            console.log('error');
+                        }
+                    });
         },
     },
 };

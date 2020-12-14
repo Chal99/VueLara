@@ -31,12 +31,12 @@
                 <a v-if="item.type">{{ item.type === "0" ? "Admin":"User" }}</a>
             </template>
             <template v-slot:[`item.operation`]="{ item }">
-                <v-row v-if="item.title">
+                <v-row v-if="item.name">
                     <div class="operation-btn">
-                        <v-btn color="primary" class="user-list-btn">Edit</v-btn>
+                        <v-btn color="primary" class="user-list-btn" @click="editUser(item)">Edit</v-btn>
                     </div>
                     <div class="operation-btn">
-                        <v-btn color="error" class="user-list-btn">Delete</v-btn>
+                        <v-btn color="error" class="user-list-btn" @click="deleteUser(item.id)">Delete</v-btn>
                     </div>
                 </v-row>
             </template>
@@ -47,4 +47,3 @@
 
 <script src="../../services/pages/user/user-list.js">
 </script>
-
