@@ -55,6 +55,18 @@ export default {
                 },
             ],
             userList: [],
+            userlist:{
+                id:'',
+                name:'',
+                email:'',
+                password:'',
+                confirmpassword:'',
+                type:'',
+                phone:'',
+                dob:'',
+                address:'',
+                profile:'',
+            },
             showList: [],
         };
     },
@@ -70,17 +82,10 @@ export default {
         },
     },
     mounted() {
-        this.$axios
-            .get("/user/list")
-            .then((response) => {
-                this.userList = response.data;
-                this.showList = this.userList;
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        this.listUser();
     },
     methods: {
+
         /**
          * This is to filter posts of datatable.
          * @returns void
@@ -100,6 +105,55 @@ export default {
                 );
             });
         },
+
+        /**
+         * This is to show list of user.
+         * @returns array
+         */
+        listUser(){
+            this.$axios
+            .get("/user")
+            .then((response) => {
+                this.userList = response.data;
+                this.showList = this.userList;
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        },
+
+        /**
+         * This is to edit user.
+         * @returns array
+         */
+        editUser(item){
+            this.$router.push({
+                name: 'user-edit', 
+                params: { item: item }
+            });
+        },
+
+        /**
+         * This is to delete user.
+         * @returns array
+         */
+        deleteUser(id){
+
+            if(! confirm('Are You sure to delete?')){
+                return;
+            }
+            this.$axios.delete(`/user/${id}`)
+                    .then((response)=> {
+                        if(response) {
+                           this.listUser();
+                        }
+                        else{
+                            console.log('error');
+                        }
+                    });
+        },
+
+
         
     },
 };

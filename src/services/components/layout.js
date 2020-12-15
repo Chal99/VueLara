@@ -30,7 +30,7 @@ export default {
          * @returns void
          */
         showProfile() {
-            // TODO: do something
+            this.$router.push({name:'profile'});
         },
     },
 };
