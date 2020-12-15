@@ -5,65 +5,66 @@
       <div class="ml-5 mr-5">
         <v-form ref="form" v-model="valid" lazy-validation enctype="multipart/form-data">
           <v-text-field
-            v-model="userlist.name"
+            v-model="user.name"
             name="name"
             label="Name"
-            :rules="userlist.nameRules"
+            :rules="user.nameRules"
             required
           ></v-text-field>
           <v-text-field
-            v-model="userlist.email"
+            v-model="user.email"
             name="email"
             label="Email"
-            :rules="userlist.emailRules"
+            :rules="user.emailRules"
             required
           ></v-text-field>
           <v-text-field
-            v-model="userlist.password"
+            v-model="user.password"
             name="password"
             label="Password"
             :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
             :type="show ? 'text' : 'password'"
-            :rules="userlist.passwordRules"
+            :rules="user.passwordRules"
             required
           ></v-text-field>
           <v-text-field
-            v-model="userlist.confirmpassword"
+            v-model="user.confirmpassword"
             name="confirmpassword"
             :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
             :type="show ? 'text' : 'password'"
-            :rules="userlist.confirmpasswordRules"
+            :rules="user.confirmpasswordRules"
             label="ConfirmPassword"
             required
           ></v-text-field>
           <v-select
-            v-model="userlist.type"
-            :items="userlist.items"
-            :rules="userlist.typeRules"
+            v-model="user.type"
+            :items="user.items"
+            :rules="user.typeRules"
             label="Type"
             required
           ></v-select>
           <v-text-field
-            v-model="userlist.phone"
+            v-model="user.phone"
             name="phone"
             label="Phone"
-            :rules="userlist.phoneRules"
+            :rules="user.phoneRules"
             required
           ></v-text-field>
           <v-text-field
-            v-model="userlist.dob"
+            v-model="user.dob"
             name="dob"
             label="Date Of Birth"
-            :rules="userlist.dobRules"
+            :rules="user.dobRules"
             required
           ></v-text-field>
           <v-text-field
-            v-model="userlist.address"
+            v-model="user.address"
             name="address"
             label="Address"
-            :rules="userlist.addressRules"
+            :rules="user.addressRules"
             required
           ></v-text-field>
+          <img v-if="url" :src="url" height="250" width="400">
           <v-btn raised class="primary" @click="uploadProfile">Upload Image</v-btn>
           <input
             type="file"
@@ -71,7 +72,7 @@
             style="display: none"
             ref="profileInput"
             @change="onUploadProfile"
-            :rules="userlist.profileRules"
+            :rules="user.profileRules"
             required
           />
           <div class="d-flex justify-end mb-6">

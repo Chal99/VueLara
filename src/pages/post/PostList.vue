@@ -21,9 +21,12 @@
         <v-data-table :headers="headers" :items="showList">
             <template v-slot:[`item.title`]="{ item }">
                 <!-- <a v-if="item.title">{{item.title}}</a> -->
-                <router-link :to="{ name: 'post-detail', params: { postId: item }}">{{item.title}}</router-link>
+                <router-link :to="{ name: 'post-detail', params: { postId: item.id }}">{{item.title}}</router-link>
             </template>
-            <template v-slot:[`item.operation`]="{ item }">
+            <template v-slot:[`item.created_at`]="{ item }">
+               <p>{{ item.created_at | moment }}</p>
+            </template>
+            <template v-if="loginType==='0'" v-slot:[`item.operation`]="{ item }">
                 <v-row v-if="item.title">
                     <div class="operation-btn">
                         <v-btn color="primary" class="post-list-btn" @click="editPost(item)">Edit</v-btn>

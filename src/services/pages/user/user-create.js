@@ -2,7 +2,7 @@ export default {
     data: () => ({
         show:false,
         userList: [],
-        userlist: {
+        user: {
             id: '',
             name: '',
             nameRules: [
@@ -48,24 +48,38 @@ export default {
         },
         imagePreview: null,
         showPreview: false,
-        profileurl: '/storage/uploads/'
+        profileurl: '/storage/uploads/',
+        url:null,
     }),
     methods: {
+      /**
+         * 
+         * This is to to ref input hidden in this function.
+         * @returns void
+         */
         uploadProfile() {
-            this.$refs.profileInput.click();//to ref input hidden in this function
+            this.$refs.profileInput.click();
         },
+        /**
+         * 
+         * This is to set user profile.
+         * @returns void
+         */
         onUploadProfile(e) {
-            this.imagePreview = "Selected File: " + e.target.files[0].name;
-            this.userlist.profile = this.$refs.profileInput.files[0];
-            console.log(this.userlist.profile);
-
+            const file = e.target.files[0];
+            this.url = URL.createObjectURL(file);
+            this.user.profile = this.$refs.profileInput.files[0];
         },
+        /**
+         * 
+         * This is to send profile image to server side storage.
+         * @returns void
+         */
         validate() {
             this.$refs.form.validate()
             // form data
             let formData = new FormData();
-            formData.append('profile', this.userlist.profile);
-            console.log(this.userlist.profile);
+            formData.append('profile', this.user.profile);
             // send upload request
             this.$axios.post('/user/image',
                 formData,
@@ -74,13 +88,16 @@ export default {
                         'Content-Type': 'multipart/form-data'
                     }
                 }) ;
-            
                 this.$router.push({
                     name: 'user-confirm', 
-                    params: { userlist: this.userlist }
+                    params: { user: this.user }
                 });
         },
-
+         /**
+         * 
+         * This is to reset form data.
+         * @returns void
+         */
         reset() {
             this.$refs.form.reset();
         }

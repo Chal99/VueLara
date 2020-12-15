@@ -88,27 +88,9 @@ export default {
         onFileChange(e) {
             const file = e.target.files[0];
             this.url = URL.createObjectURL(file);
-
             this.newProfileLink = this.$refs.profileInput.files[0].name;
-
-
             this.userlist.profile = file;
-            console.log(this.userlist.profile);
         },
-
-
-        /**
-         * 
-         * This is to get file from input.
-         * @returns array
-         */
-        // onUploadProfile() {
-        //     // this.imagePreview = "Selected File: " + e.target.files[0].name;
-        //     this.newProfile = this.$refs.profileInput.files[0];
-        //     this.newProfileLink = this.$refs.profileInput.files[0].name;
-
-        //     this.userlist.profile= this.newProfile;
-        // },
 
         /**
          * 
@@ -138,9 +120,6 @@ export default {
                     .then((response) => {
                         if (response) {
                             this.$router.push({ name: 'post-list' })
-                        }
-                        else {
-                            console.log('error');
                         }
                     })
         },

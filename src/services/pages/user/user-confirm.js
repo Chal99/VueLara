@@ -2,7 +2,7 @@ export default {
     data() {
         return {
             userList: [],
-            userlist: {
+            user: {
                 id: '',
                 name: '',
                 email: '',
@@ -18,7 +18,8 @@ export default {
                 id:'',
                 name:'',
                 path:'',
-            }
+            },
+            error:"",
 
         };
     },
@@ -27,10 +28,9 @@ export default {
             .get("/user/image/confirm")
             .then((response) => {
                 this.image = response.data;
-                // this.userlist.profile=this.image.path;
             })
             .catch((err) => {
-                console.log(err);
+                this.error=err.response.data.errors;
             });
     },
     methods: {
@@ -40,24 +40,23 @@ export default {
          * @returns array
          */
         storeUser(){
-            this.userlist=this.$route.params.userlist;
-            this.userlist.profile=this.image.path;
-            if(this.userlist.type==="Admin"){
-                this.userlist.type="0";
+            this.user=this.$route.params.user;
+            this.user.profile=this.image.path;
+            if(this.user.type==="Admin"){
+                this.user.type="0";
             }
             else{
-                this.userlist.type="1";
+                this.user.type="1";
             }
-            console.log(this.userlist);
-            this.$axios.post("/user",this.userlist=this.$route.params.userlist)
+            this.$axios.post("/user",this.user=this.$route.params.user)
                 .then((response)=> { 
                     if(response) {
                         this.$router.push({name:'user-list'})
                     }
-                    else{
-                        console.log('error');
-                    }
                 })
+                .catch((err) => {
+                    this.error=err.response.data.errors;
+                });
         },
     },
 };

@@ -8,7 +8,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-       <img :src="image_url+$route.params.userId.profile" height="250" width="350">
+       <img :src="image_url+user.profile" height="250" width="350">
       </v-col>
     </v-row>
     <v-row>
@@ -19,7 +19,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.userId.name }}</p>
+        <p class="font-weight-medium">{{ user.id }}</p>
       </v-col>
     </v-row>
     <v-row>
@@ -30,7 +30,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.userId.email }}</p>
+        <p class="font-weight-medium">{{ user.email }}</p>
       </v-col>
     </v-row>
     <v-row>
@@ -41,7 +41,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.userId.type }}</p>
+        <p class="font-weight-medium">{{ user.type }}</p>
       </v-col>
     </v-row>
     <v-row>
@@ -52,7 +52,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.userId.phone }}</p>
+        <p class="font-weight-medium">{{ user.phone }}</p>
       </v-col>
     </v-row>
     <v-row>
@@ -63,7 +63,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.userId.dob }}</p>
+        <p class="font-weight-medium">{{ user.dob }}</p>
       </v-col>
     </v-row>
     <v-row>
@@ -74,7 +74,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.userId.address }}</p>
+        <p class="font-weight-medium">{{ user.address }}</p>
       </v-col>
     </v-row>
     <v-row>
@@ -85,7 +85,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.userId.created_at }}</p>
+        <p class="font-weight-medium">{{ user.created_at | moment }}</p>
       </v-col>
     </v-row>
     <v-row>
@@ -96,7 +96,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.userId.name }}</p>
+        <p class="font-weight-medium">{{ user.name }}</p>
       </v-col>
     </v-row>
     <v-row>
@@ -107,7 +107,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.userId.updated_at }}</p>
+        <p class="font-weight-medium">{{ user.updated_at | moment }}</p>
       </v-col>
     </v-row>
     <v-row>
@@ -118,7 +118,7 @@
         <p>:</p>
       </v-col>
       <v-col :cols="9">
-        <p class="font-weight-medium">{{ $route.params.userId.name }}</p>
+        <p class="font-weight-medium">{{ user.name }}</p>
       </v-col>
     </v-row>
     <div class="d-flex justify-end">

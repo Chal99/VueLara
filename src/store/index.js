@@ -43,50 +43,37 @@ export default new Vuex.Store({
                     password:credentials.password
                 })
                 .then(function(response){
-                    // console.log(response.data);
-                    const token=response.data.accessToken;
-                    const user=response.data.user;
-                    const password=response.data.password;
-                    console.log(user);
-                    localStorage.setItem('accessToken',token);
-                    commit('loginToken',{token,user,password});
-                    
+                        const token=response.data.accessToken;
+                        const user=response.data.user;
+                        console.log(user);
+                        const password=response.data.password;
+                        localStorage.setItem('accessToken',token);
+                        commit('loginToken',{token,user,password});
                 })
-                .catch(error=>{
-                    console.log('hi');
-                    console.log(error);
+                .catch(message=>{
+                    console.log(message);
                 });
         },
         logout({ commit }) {
             return axios.post("/logout")
             .then((response) => {
-                console.log(response);
-                localStorage.removeItem('access_token');
-                commit('logoutToken');
+                if(response){
+                    localStorage.removeItem('access_token');
+                    commit('logoutToken');
+                }
             })
             .catch(error=>{
-                console.log(error);
-                localStorage.removeItem('access_token');
-                commit('logoutToken');
+                if(error){
+                    localStorage.removeItem('access_token');
+                    commit('logoutToken');
+                }
             });
         },
     },
-    getters: {
-        // isLoggedIn: (state) => !!state.user,
+    getters: {  
         isLoggedIn(state){
             return state.token!=null;
         },
-        // userType: (state) => {
-        //     if (state.user && state.user.data.user_type) {
-        //         return state.user.data.user_type;
-        //     }
-        //     return -1;
-        // },
-        // userId: (state) => {
-        //     if (state.user && state.user.data.user_id) {
-        //         return state.user.data.user_id;
-        //     }
-        // },
         userId(state){
             return state.user.id;
         },
@@ -114,11 +101,6 @@ export default new Vuex.Store({
         userProfile(state){
             return state.user.profile;
         },
-        // userName: (state) => {
-        //     if (state.user && state.user.data.user_name) {
-        //         return state.user.data.user_name;
-        //     }
-        // },
     },
     plugins: [createPersistedState()],
 });

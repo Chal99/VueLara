@@ -1,14 +1,9 @@
 import { mapGetters } from "vuex";
+import moment from 'moment'
+
 export default {
     data() {
         return {
-            postInfo: null,
-            dialogTitle: "",
-            dialog: false,
-            isDeleteDialog: false,
-            id:'',
-            title:'',
-            description:'',
             headerList: [
                 {
                     text: "ID",
@@ -37,14 +32,16 @@ export default {
                 },
             ],
             postList: [],
-            postlist:{
-                id:'',
-                status:'',
-                title:'',
-                description:''
+            post: {
+                id: '',
+                status: '',
+                title: '',
+                description: ''
             },
             showList: [],
-            search:'',
+            search: '',
+            error:'',
+            loginType:this.$store.getters.userType,
 
         };
     },
@@ -60,23 +57,28 @@ export default {
         },
     },
     mounted() {
-       this.listPost();
+        this.listPost();
+    },
+    filters: {
+        moment: function (date) {
+            return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+        }
     },
     methods: {
         /**
          * This is for search by title.
          * @returns void
          */
-        searchPost(){
-            this.$axios.get('/post?search='+this.search)
-            .then((response)=> {
-                if(response) {
-                    this.showList = response.data;
-                }
-                else{
-                    console.log('error');
-                }
-            });
+        searchPost() {
+            this.$axios.get('/post?search=' + this.search)
+                .then((response) => {
+                    if (response) {
+                        this.showList = response.data;
+                    }
+                    else {
+                        console.log('error');
+                    }
+                });
         },
         /**
          * This is to filter posts of datatable.
@@ -97,33 +99,40 @@ export default {
          * This is to show list of post.
          * @returns array
          */
-        listPost(){
+        listPost() {
             this.$axios
-            .get("/post")
-            .then((response) => {
-                this.postList = response.data;
-                this.showList = this.postList;
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+                .get("/post")
+                .then((response) => {
+                    this.postList = response.data;
+                    this.showList = this.postList;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+        /**
+        * This is to create post.
+        * @returns array
+        */
+        createPost() {
+            this.$router.push({ name: 'post-create' })
         },
 
-        createPost(){
-            this.$router.push({name:'post-create'})
-        },
-
-        uploadPost(){
-            this.$router.push({name:'post-upload'})
+        /**
+        * This is to upload post.
+        * @returns array
+        */
+        uploadPost() {
+            this.$router.push({ name: 'post-upload' })
         },
 
         /**
          * This is to edit post.
          * @returns array
          */
-        editPost(item){
+        editPost(item) {
             this.$router.push({
-                name: 'post-edit', 
+                name: 'post-edit',
                 params: { item: item }
             });
         },
@@ -132,20 +141,20 @@ export default {
          * This is to delete post.
          * @returns array
          */
-        deletePost(id){
+        deletePost(id) {
 
-            if(! confirm('Are You sure to delete?')){
+            if (!confirm('Are You sure to delete?')) {
                 return;
             }
             this.$axios.delete(`/post/${id}`)
-                    .then((response)=> {
-                        if(response) {
-                           this.listPost();
-                        }
-                        else{
-                            console.log('error');
-                        }
-                    });
+                .then((response) => {
+                    if (response) {
+                        this.listPost();
+                    }
+                })
+                .catch(error=>{
+                    this.error=error.response.data.errors;
+                })
         },
     },
 };

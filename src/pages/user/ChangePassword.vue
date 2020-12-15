@@ -6,30 +6,30 @@
         color="dark lighten-2"
         dark
       >
-         <p v-if="this.confirmerror" class="font-weight-black">{{confirmerror}}</p>
-         <p v-if="this.newpassworderror" class="font-weight-black">{{newpassworderror}}</p>
-         <p v-if="this.currentpassworderror" class="font-weight-black">{{currentpassworderror}}</p>
+        <p v-if="this.confirmerror" class="font-weight-black">{{confirmerror}}</p>
+        <p v-if="this.newpassworderror" class="font-weight-black">{{newpassworderror}}</p>
+        <p v-if="this.currentpassworderror" class="font-weight-black">{{currentpassworderror}}</p>
 
       </v-alert>
       
     <div class="ml-5 mr-5">
       <v-form ref="form" v-model="valid" lazy-validation @submit.prevent="changePassword">
         <v-text-field 
-        v-model="userlist.currentpassword" 
+        v-model="user.currentpassword" 
         name="oldpassword" 
         label="Old Password" 
         :rules="currentpasswordRules"
         required>
         </v-text-field>
         <v-text-field 
-        v-model="userlist.newpassword" 
+        v-model="user.newpassword" 
         name="newpassword" 
         label="New Password"
         :rules="newpasswordRules"
         required>
         </v-text-field>
         <v-text-field 
-        v-model="userlist.confirmpassword" 
+        v-model="user.confirmpassword" 
         name="confirmpassword" 
         label="Confirm Password"
         :rules="confirmpasswordRules"
@@ -52,7 +52,3 @@
 
 <script src="../../services/pages/user/change-password.js">
 </script>
-
-<style scoped src="../../assets/css/pages/post/post-list.css">
-</style>
-
