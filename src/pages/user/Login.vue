@@ -2,6 +2,13 @@
 <v-card class="mx-auto" max-width="344">
     <v-card-title class="login-title">
         <span class="title font-weight-light">Login</span>
+        <v-alert v-if="this.error"
+        border="top"
+        color="dark lighten-2"
+        dark
+      >
+        <p v-if="this.error" class="font-weight-black">{{error}}</p>
+      </v-alert>
     </v-card-title>
     <v-form ref="form" v-model="valid" @submit.prevent="login">
         <v-card-text>

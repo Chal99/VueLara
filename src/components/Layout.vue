@@ -14,6 +14,8 @@
                     <v-spacer></v-spacer>
                     <div class="route-links">
                         <v-menu offset-y v-if="isLoggedIn">
+                            <router-link class="route-link" :to="{ name: 'user-create' }">Register</router-link>
+
                             <template v-slot:activator="{ on }">
                                 <v-btn class="ma-2" text v-on="on">
                                     {{userName}}
@@ -30,7 +32,6 @@
                             </v-list>
                         </v-menu>
                         <router-link class="route-link" :to="{ name: 'login' }" v-if="!isLoggedIn">Login</router-link>
-                        <router-link class="route-link" :to="{ name: 'user-create' }" v-if="!isLoggedIn">Register</router-link>
                     </div>
                 </v-row>
             </v-container>

@@ -2,7 +2,7 @@ export default {
     data() {
         return {
             postList: [],
-            postlist:{
+            post:{
                 id:'',
                 status:'',
                 title:'',
@@ -20,7 +20,7 @@ export default {
          * @returns array
          */
         storePost(){
-            this.$axios.post("/post",this.postlist=this.$route.params.postlist)
+            this.$axios.post("/post",this.post=this.$route.params.post)
                 .then((response)=> { 
                     if(response) {
                         this.$router.push({name:'post-list'})
@@ -37,7 +37,7 @@ export default {
         confirmBack(){
             this.$router.push({
                 name: 'post-create', 
-                params: { postlist: this.$route.params.postlist }
+                params: { post: this.$route.params.post }
             });
         },
         

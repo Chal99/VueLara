@@ -1,4 +1,6 @@
 import { mapGetters } from "vuex";
+import moment from 'moment'
+
 export default {
     data() {
         return {
@@ -83,6 +85,11 @@ export default {
     },
     mounted() {
         this.listUser();
+    },
+    filters: {
+        moment: function (date) {
+            return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+        }
     },
     methods: {
 

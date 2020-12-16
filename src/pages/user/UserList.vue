@@ -24,8 +24,13 @@
     <v-container>
         <v-data-table :headers="headers" :items="showList">
             <template v-slot:[`item.name`]="{ item }">
-                <!-- <a v-if="item.title">{{item.title}}</a> -->
-                <router-link :to="{ name: 'user-detail', params: { userId: item }}">{{item.name}}</router-link>
+                <router-link :to="{ name: 'user-detail', params: { userId: item.id }}">{{item.name}}</router-link>
+            </template>
+            <template v-slot:[`item.created_at`]="{ item }">
+               <p>{{ item.created_at | moment }}</p>
+            </template>
+            <template v-slot:[`item.updated_at`]="{ item }">
+               <p>{{ item.updated_at | moment }}</p>
             </template>
             <template v-slot:[`item.type`]="{ item }">
                 <a v-if="item.type">{{ item.type === "0" ? "Admin":"User" }}</a>
